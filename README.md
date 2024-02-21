@@ -168,10 +168,20 @@ docker run -d \
 alias vip="docker exec -it mydb psql -U postgres -c 'select * from vip;'"
 ```
 
+reuse unnamed volume
 
 ```
 docker run -d \
   -v 768705ead2981c361d83d62057891ceabce6f7d945a7be71abc9aebd32d57d51:/var/lib/postgresql/data \
+  --name mydb \
+  -e POSTGRES_PASSWORD=secret \
+  postgres
+```
+
+```
+docker run -d \
+  -v vipdb:/var/lib/postgresql/data \
+  -v $PWD/sql:/docker-entrypoint-initdb.d \
   --name mydb \
   -e POSTGRES_PASSWORD=secret \
   postgres
