@@ -3,6 +3,8 @@
 
 Notes: https://lalyos.notion.site/Lufthansa-docker-2023-02-21-8865d5e816f64f828e558314c2349b32?pvs=25
 
+https://github.com/lalyos/docker-lufi-2024-02-
+
 
 ```
 docker version
@@ -94,4 +96,83 @@ docker exec $(docker ps -lq) curl -s localhost
 
 ```
 docker run -d  lunch:v2
+```
+
+
+## Publish Images
+
+```
+docker build -t lalyos/lunch:v6
+# register a user at hub.docker.com
+docker login
+docker push lalyos/lunch:v6
+```
+
+Image cannonical name:
+ubuntu = docker.io/library/ubuntu:latest
+- docker.io : registry server dns
+- library: owner/repo
+- ubuntu: image name
+- latest: tag/version
+
+
+```
+docker build -t ttl.sh/lalyos/lunch:v6 
+docker push ttl.sh/lalyos/lunch:v6 
+```
+
+```
+docker run -dP \
+  -e COLOR=hotpink \
+  -e TITLE="coffee time for lalyos [XX2]" \
+  -e BODY='todo ...' \
+  lalyos/lunch:v6
+```
+
+
+
+
+## Networking
+
+```
+docker network ls
+
+docker network create lufi
+docker run -dP \
+  --name back \
+  -e TITLE=backend \
+  --net lufi  \
+  lunch:v6
+
+
+docker run -it \
+  --net lufi 
+  tool
+```
+
+## Volumes
+
+```
+docker volume ls
+```
+
+### Postgres
+```
+docker run -d \
+  --name mydb \
+  -e POSTGRES_PASSWORD=secret \
+  postgres
+```
+
+```
+alias vip="docker exec -it mydb psql -U postgres -c 'select * from vip;'"
+```
+
+
+```
+docker run -d \
+  -v 768705ead2981c361d83d62057891ceabce6f7d945a7be71abc9aebd32d57d51:/var/lib/postgresql/data \
+  --name mydb \
+  -e POSTGRES_PASSWORD=secret \
+  postgres
 ```
