@@ -1,4 +1,17 @@
 services:
+  backend:
+    image: backend
+    init: true
+    ports:
+      - 80
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./cgi-bin:/www/cgi-bin
+    environment:
+      - VIRTUAL_HOST=backend.lvh.me
+
   proxy:
     image: nginxproxy/nginx-proxy:1.4
     ports:
