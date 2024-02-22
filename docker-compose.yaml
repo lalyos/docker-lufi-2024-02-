@@ -1,6 +1,7 @@
 services:
   coffee:
     image: lunch:v7
+    build: .
     environment:
       - TITLE=coffee break for lalyos
       - COLOR=hotpink
