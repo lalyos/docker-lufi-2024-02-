@@ -1,0 +1,14 @@
+FROM alpine
+
+RUN apk add bash curl busybox-extras jq cmd:psql
+COPY <<EOF /www/index.html
+<html> 
+  <head>
+    <meta http-equiv="refresh" content="0; url='/cgi-bin/vip'" />
+  </head>
+  <body>
+  </body>
+</html>
+EOF
+CMD ["httpd", "-p", "80", "-f", "-v", "-h", "/www/"]
+

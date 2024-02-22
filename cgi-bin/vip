@@ -1,0 +1,8 @@
+#!/bin/bash
+cat <<EOF
+Content-Type: application/json
+
+EOF
+
+
+PGPASSWORD=secret psql -h mydb -U postgres -c 'select json_agg(vip) from vip' -t -A | jq
