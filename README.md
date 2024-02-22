@@ -186,3 +186,28 @@ docker run -d \
   -e POSTGRES_PASSWORD=secret \
   postgres
 ```
+
+## Compose
+
+default project name is actual dir
+```
+docker compose up -d
+
+docker compose up -d --build
+```
+
+project name from env var
+```
+export COMPOSE_PROJECT_NAME=dev
+docker compose up -d --build
+```
+
+explicit project name
+```
+docker compose -p dev up -d --build
+```
+
+custom .env file
+```
+docker compose --env-file .env.prod up -d --build
+```
