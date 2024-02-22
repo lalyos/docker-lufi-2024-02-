@@ -1,0 +1,8 @@
+services:
+  coffee:
+    image: lunch:v7
+    environment:
+      - TITLE=coffee break for lalyos
+      - COLOR=hotpink
+    ports:
+      - 80
