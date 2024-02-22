@@ -1,0 +1,11 @@
+services: 
+  proxy:
+    image: nginxproxy/nginx-proxy:1.4
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+  default:
+    name: proxy

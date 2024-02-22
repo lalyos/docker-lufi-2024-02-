@@ -12,13 +12,6 @@ services:
     environment:
       - VIRTUAL_HOST=backend.lvh.me
 
-  proxy:
-    image: nginxproxy/nginx-proxy:1.4
-    ports:
-      - 80:80
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-
   coffee:
     image: lunch:v7
     build: .
@@ -26,7 +19,7 @@ services:
       - TITLE=${TITLE:-Welcome}
       - COLOR=${COLOR:-gray}
       - BODY=${BODY:-please use TITLE/COLOR/BODY env vars}
-      - VIRTUAL_HOST=coffee.lvh.me
+      - VIRTUAL_HOST=coffee.${COMPOSE_PROJECT_NAME}.lvh.me
     ports:
       - 80
   
@@ -45,4 +38,7 @@ services:
 
 volumes:
   vipdb:
-  
+
+networks:
+  default:
+    name: proxy
