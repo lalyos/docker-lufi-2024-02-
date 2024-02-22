@@ -14,4 +14,4 @@ cat > /var/www/html/index.html <<EOF
 EOF
 
 
-nginx -g "daemon off;"
+exec nginx -g "daemon off;"
