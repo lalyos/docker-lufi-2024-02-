@@ -7,3 +7,19 @@ services:
       - COLOR=hotpink
     ports:
       - 80
+  
+  mydb:
+    image: postgres
+    environment:
+    - POSTGRES_PASSWORD=secret
+    volumes:
+    - vipdb:/var/lib/postgresql/data
+    - ./sql:/docker-entrypoint-initdb.d
+  
+  adminer:
+    image: adminer
+    ports:
+    - 8080
+
+volumes:
+  vipdb:
