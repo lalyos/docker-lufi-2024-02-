@@ -1,10 +1,23 @@
 services: 
-  proxy:
-    image: nginxproxy/nginx-proxy:1.4
+  traefik:
+    image: traefik:1.7-alpine
+    container_name: traefik
+    restart: always
+    command:
+      - --retry
+      #- --debug
+      - --rest
+      - --docker.domain=lvh.me
+      - --docker.network=traefik
+      - --api.dashboard
+    labels:
+      - "traefik.frontend.rule=Host:traefik.lvh.me"
+      - "traefik.port=8080"
     ports:
       - 80:80
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
 
 networks:
   default:

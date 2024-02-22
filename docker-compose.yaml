@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile.backend
     volumes:
       - ./cgi-bin:/www/cgi-bin
-    environment:
-      - VIRTUAL_HOST=backend.lvh.me
 
   coffee:
     image: lunch:v7
@@ -19,7 +17,6 @@ services:
       - TITLE=${TITLE:-Welcome}
       - COLOR=${COLOR:-gray}
       - BODY=${BODY:-please use TITLE/COLOR/BODY env vars}
-      - VIRTUAL_HOST=coffee.${COMPOSE_PROJECT_NAME}.lvh.me
     ports:
       - 80
   
