@@ -17,6 +17,8 @@ services:
       - TITLE=${TITLE:-Welcome}
       - COLOR=${COLOR:-gray}
       - BODY=${BODY:-please use TITLE/COLOR/BODY env vars}
+    labels:
+      - traefik.frontend.auth.basic=admin:$$1$$I5Kt8BwT$$G4y6mBV3xVzyZKUECxqV61
     ports:
       - 80
   
